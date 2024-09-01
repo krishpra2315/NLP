@@ -24,34 +24,18 @@ if __name__ == '__main__':
 
     model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
 
+    #populate the embedding column
     for i in range(1, data_length + 1):
-        cursor.execute("""
-                          SELECT title, description FROM public.film
-                          WHERE film_id = """ + str(i))
+        #build statement with title and description of each film
+        cursor.execute("SELECT title, description FROM public.film WHERE film_id = " + str(i))
         data = cursor.fetchall()
         embedded_message = "The film named " + data[0][0] + " is about " + data[0][1]
-        print(embedded_message)
+        # embed and format the returned value with proper SQL vector formatting
         embedding = model.encode(embedded_message)
         formattedEmbedding = str(embedding).replace('  ', ', ').replace(' -', ', -')
+        #build SQL request to populate the embedding
         sqlCode = "UPDATE film SET embedding = '" + formattedEmbedding + "' WHERE film_id = " + str(i) + ";"
         cursor.execute(sqlCode)
 
-    cursor.execute("""
-                              SELECT embedding FROM public.film
-                              WHERE film_id =1000
-                  """)
-    print(cursor.fetchall())
-
     conn.commit()
     conn.close()
-
-    '''model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
-    query_embedding = model.encode('How big is London')
-    passage_embedding = model.encode(['London has 9,787,426 inhabitants at the 2011 census',
-                                      'London is known for its finacial district'])
-    print("Similarity:", util.dot_score(query_embedding, passage_embedding))
-
-    query_embedding2 = model.encode('How many kids do you havese')
-    passage_embedding2 = model.encode(['I have 3 kids',
-                                      'Barcelona is 3000 meters wide'])
-    print("Similarity:", util.dot_score(query_embedding2, passage_embedding2))'''
