@@ -1,5 +1,5 @@
 # Natural Language Processor
-This natural language processor in python built using Hugging Face's sentence transformer.
+This is a natural language processor in Python built using Hugging Face's [sentence transformer](https://huggingface.co/sentence-transformers).
 ## Database
 The database used in this project is the [pgvector](https://github.com/pgvector/pgvector) extension of [PostgreSQL](https://www.postgresql.org). 
 The sample database is [dvdrental](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) and this program connects to the film table within it.
