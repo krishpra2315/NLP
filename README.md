@@ -1,4 +1,4 @@
-# Natural Language Processor
+# Semantic Search with PGVector
 This is a natural language processor in Python built using Hugging Face's [sentence transformer](https://huggingface.co/sentence-transformers).
 ## Database
 The database used in this project is the [pgvector](https://github.com/pgvector/pgvector) extension of [PostgreSQL](https://www.postgresql.org). 
