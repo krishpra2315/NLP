@@ -22,10 +22,10 @@ if __name__ == '__main__':
 
     embedded_message = input("What is the movie about?")
     embedding = model.encode(embedded_message)
-    formattedEmbedding = str(embedding).replace('  ', ', ').replace(' -', ', -')
+    formatted_embedding = str(embedding).replace('  ', ', ').replace(' -', ', -')
 
     #find closest 3 vector matches to the embedding of user query using cosine similarity
-    sqlCode = "SELECT title, release_year FROM film ORDER BY embedding <=> '" + formattedEmbedding + "' LIMIT 3;"
+    sqlCode = "SELECT title, release_year FROM film ORDER BY embedding <=> '" + formatted_embedding + "' LIMIT 3;"
 
     cursor.execute(sqlCode)
     data = cursor.fetchall()
