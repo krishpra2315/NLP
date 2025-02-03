@@ -32,9 +32,9 @@ if __name__ == '__main__':
         embedded_message = "The film named " + data[0][0] + " is about " + data[0][1]
         # embed and format the returned value with proper SQL vector formatting
         embedding = model.encode(embedded_message)
-        formattedEmbedding = str(embedding).replace('  ', ', ').replace(' -', ', -')
+        formatted_embedding = str(embedding).replace('  ', ', ').replace(' -', ', -')
         #build SQL request to populate the embedding
-        sqlCode = "UPDATE film SET embedding = '" + formattedEmbedding + "' WHERE film_id = " + str(i) + ";"
+        sqlCode = "UPDATE film SET embedding = '" + formatted_embedding + "' WHERE film_id = " + str(i) + ";"
         cursor.execute(sqlCode)
 
     conn.commit()
